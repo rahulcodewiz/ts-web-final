@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>GraphQL with Sangria</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Oleg Ilyenko">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="/assets/ipc/css/reveal.css">
+		<link rel="stylesheet" href="/assets/ipc/css/theme/white.css" id="theme">
+    <link rel="stylesheet" href="/assets/ipc/assets/custom.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="/assets/ipc/lib/css/zenburn.css">
+
+    <script src="/assets/ipc/assets/offline/fonts.js"></script>
+
+    <script src="https://use.typekit.net/jor2kyz.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/assets/ipc/css/print/pdf.css' : '/assets/ipc/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+    <link rel="stylesheet" href="/assets/ipc/assets/highlight/solarized_light.css">
+
+    <link href="//cdn.jsdelivr.net/graphiql/0.4.2/graphiql.css" rel="stylesheet" />
+	</head>
+
+	<body>
+    <div id="credit" style="display: none"></div>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#D45CA2" class="first-slide">
+          <img src="/assets/ipc/assets/img/graphql-white.svg" class="logo-image"/>
+
+          <p style="text-align: center" class="title-font">
+            Introduction to <strong>GraphQL</strong>
+          </p>
+
+          <p style="font-size: 70%; opacity: 0.5" class="normal-font">
+            by Oleg Ilyenko / <a href="https://twitter.com/easyangel">@easyangel</a>
+          </p>
+				</section>
+
+        <section>
+          <h2>Typical Rest API</h2>
+
+          <img src="/assets/ipc/assets/img/rest-api.svg" style="width: 80%">
+        </section>
+
+        <section>
+          <h2>Common Issues</h2>
+
+          <ul>
+            <li>
+              Over-fetching
+
+              <ul class="fragment fade-in" data-fragment-index="1">
+                <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span class="qname">field</span>=<span class="qvalue">description</span>&<span class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="2">
+              Under-fetching
+
+              <ul class="fragment fade-in" data-fragment-index="3">
+                <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
+              </ul>
+            </li>
+            <li class="fragment fade-in" data-fragment-index="4">
+              API changes and evolution
+
+              <ul class="fragment fade-in" data-fragment-index="5">
+                <li>Versioning</li>
+                <li>Deprecation</li>
+                <li>Maintenance</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Gateways</h2>
+
+          <img src="/assets/ipc/assets/img/api-gateway.svg">
+        </section>
+
+        <section>
+          <h2>GraphQL Approach</h2>
+
+          <img src="/assets/ipc/assets/img/graphql-api.svg" style="max-width: 70%">
+        </section>
+
+        <section>
+          <h2>GraphQL</h2>
+
+          <ul>
+            <li>A data query language</li>
+            <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook</li>
+            <li class="fragment fade-in" data-fragment-index="2">Used internally since 2012</li>
+            <li class="fragment fade-in" data-fragment-index="3">Open source version published in July 2015</li>
+            <li class="fragment fade-in" data-fragment-index="4">Relay released in August 2015</li>
+            <li class="fragment fade-in" data-fragment-index="5">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
+          </ul>
+        </section>
+    </div>
+  </div>
+		<script src="/assets/ipc/lib/js/head.min.js"></script>
+		<script src="/assets/ipc/js/reveal.js"></script>
+		<script src="/assets/ipc/assets/jquery-2.1.3.min.js"></script>
+		<script src="/assets/ipc/assets/custom.js"></script>
+
+		<script>
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '/assets/ipc/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '/assets/ipc/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/assets/ipc/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/assets/ipc/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/assets/ipc/plugin/zoom-js/zoom.js', async: true },
+					{ src: '/assets/ipc/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
