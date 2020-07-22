@@ -1,155 +1,336 @@
 <!doctype html>
 <html lang="en">
-  <head>
-		<meta charset="utf-8">
 
-		<title>GraphQL with Sangria</title>
+<head>
+  <meta charset="utf-8">
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Oleg Ilyenko">
+  <title>GraphQL with Sangria</title>
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Oleg Ilyenko">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<link rel="stylesheet" href="/assets/ipc/css/reveal.css">
-		<link rel="stylesheet" href="/assets/ipc/css/theme/white.css" id="theme">
-    <link rel="stylesheet" href="/assets/ipc/assets/custom.css">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="/assets/ipc/lib/css/zenburn.css">
+  <link rel="stylesheet" href="/assets/ipc/css/reveal.css">
+  <link rel="stylesheet" href="/assets/ipc/css/theme/white.css" id="theme">
+  <link rel="stylesheet" href="/assets/ipc/assets/custom.css">
 
-    <script src="/assets/ipc/assets/offline/fonts.js"></script>
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="/assets/ipc/lib/css/zenburn.css">
 
-    <script src="https://use.typekit.net/jor2kyz.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/css/d3-circle-graph-node.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '/assets/ipc/css/print/pdf.css' : '/assets/ipc/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
 
-		<!--[if lt IE 9]>
+  <script src="/assets/ipc/assets/offline/fonts.js"></script>
+
+  <script src="https://use.typekit.net/jor2kyz.js"></script>
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+  <!-- Color palette -->
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '/assets/ipc/css/print/pdf.css' : '/assets/ipc/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 
-    <link rel="stylesheet" href="/assets/ipc/assets/highlight/solarized_light.css">
+  <link rel="stylesheet" href="/assets/ipc/assets/highlight/solarized_light.css">
 
-    <link href="//cdn.jsdelivr.net/graphiql/0.4.2/graphiql.css" rel="stylesheet" />
-	</head>
+  <link href="//cdn.jsdelivr.net/graphiql/0.4.2/graphiql.css" rel="stylesheet" />
+</head>
 
 
-	<body>
-    <div id="credit" style="display: none"></div>
+<body>
+  <div id="credit" style="display: none"></div>
 
-		<div class="reveal">
+  <div class="reveal">
+    <div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section data-background="#D45CA2" class="first-slide">
-          <img src="/assets/ipc/assets/img/graphql-white.svg" class="logo-image"/>
+      <section>
+        <h2>Techsquids</h2>
+        <!-- Create a div where the graph will take place -->
+        <table class="notFound" cellspacing="0" cellpadding="0" style="width: 100%; border: none;">
+          <colgroup>
+            <col style="width: 70%;" />
+            <col style="width: 30%;" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td rowspan="2">
+              
+                <div id="frontSlideCountryGraph"></div>
+              </td>
+              <td>
+                <div>
+                <svg id="continentsSvg" width="200" height="200">
+                  <g id="wrapper" transform="translate(0, 100)">
+                    </g>
+                </svg>
+              </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div id="ttText" style="border: 1px; color: black;">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-          <p style="text-align: center" class="title-font">
-            Journey of <strong>Techsquids</strong>
-          </p>
+      </section>
 
-          <p style="font-size: 70%; opacity: 0.5" class="normal-font">
-            by Rahul Sharma</p>
-				</section>
+      <section>
+        <h2>Common Issues</h2>
 
-        <section>
-          <h2>Typical Rest API</h2>
+        <ul>
+          <li>
+            Over-fetching
 
-          <img src="/assets/ipc/assets/img/rest-api.svg" style="width: 80%">
-        </section>
+            <ul class="fragment fade-in" data-fragment-index="1">
+              <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span
+                  class="qname">field</span>=<span class="qvalue">description</span>&<span
+                  class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
+            </ul>
+          </li>
+          <li class="fragment fade-in" data-fragment-index="2">
+            Under-fetching
 
-        <section>
-          <h2>Common Issues</h2>
+            <ul class="fragment fade-in" data-fragment-index="3">
+              <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span
+                  class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
+            </ul>
+          </li>
+          <li class="fragment fade-in" data-fragment-index="4">
+            API changes and evolution
 
-          <ul>
-            <li>
-              Over-fetching
+            <ul class="fragment fade-in" data-fragment-index="5">
+              <li>Versioning</li>
+              <li>Deprecation</li>
+              <li>Maintenance</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
 
-              <ul class="fragment fade-in" data-fragment-index="1">
-                <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span class="qname">field</span>=<span class="qvalue">description</span>&<span class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
-              </ul>
-            </li>
-            <li class="fragment fade-in" data-fragment-index="2">
-              Under-fetching
+      <section>
+        <h2>API Gateways</h2>
 
-              <ul class="fragment fade-in" data-fragment-index="3">
-                <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
-              </ul>
-            </li>
-            <li class="fragment fade-in" data-fragment-index="4">
-              API changes and evolution
+        <img src="/assets/ipc/assets/img/api-gateway.svg">
+      </section>
 
-              <ul class="fragment fade-in" data-fragment-index="5">
-                <li>Versioning</li>
-                <li>Deprecation</li>
-                <li>Maintenance</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
+      <section>
+        <h2>GraphQL Approach</h2>
 
-        <section>
-          <h2>API Gateways</h2>
+        <img src="/assets/ipc/assets/img/graphql-api.svg" style="max-width: 70%">
+      </section>
 
-          <img src="/assets/ipc/assets/img/api-gateway.svg">
-        </section>
+      <section>
+        <h2>GraphQL</h2>
 
-        <section>
-          <h2>GraphQL Approach</h2>
+        <ul>
+          <li>A data query language</li>
+          <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook</li>
+          <li class="fragment fade-in" data-fragment-index="2">Used internally since 2012</li>
+          <li class="fragment fade-in" data-fragment-index="3">Open source version published in July 2015</li>
+          <li class="fragment fade-in" data-fragment-index="4">Relay released in August 2015</li>
+          <li class="fragment fade-in" data-fragment-index="5">Specification: <a
+              href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
+        </ul>
+      </section>
 
-          <img src="/assets/ipc/assets/img/graphql-api.svg" style="max-width: 70%">
-        </section>
 
-        <section>
-          <h2>GraphQL</h2>
+      <section data-background="#D45CA2" class="first-slide">
 
-          <ul>
-            <li>A data query language</li>
-            <li class="fragment fade-in" data-fragment-index="1">Developed by Facebook</li>
-            <li class="fragment fade-in" data-fragment-index="2">Used internally since 2012</li>
-            <li class="fragment fade-in" data-fragment-index="3">Open source version published in July 2015</li>
-            <li class="fragment fade-in" data-fragment-index="4">Relay released in August 2015</li>
-            <li class="fragment fade-in" data-fragment-index="5">Specification: <a href="https://facebook.github.io/graphql" target="_blank">https://facebook.github.io/graphql</a></li>
-          </ul>
-        </section>
+        <p style="text-align: center" class="title-font">
+          <str>Thank You</str>
+        </p>
+        <p style="text-align: center" class="title-font">
+          Journey of <strong>Techsquids</strong>
+        </p>
+
+        <p style="font-size: 70%; opacity: 0.5" class="normal-font">
+          by Rahul Sharma</p>
+      </section>
     </div>
   </div>
-		<script src="/assets/ipc/lib/js/head.min.js"></script>
-		<script src="/assets/ipc/js/reveal.js"></script>
-		<script src="/assets/ipc/assets/jquery-2.1.3.min.js"></script>
-		<script src="/assets/ipc/assets/custom.js"></script>
+  <script src="/assets/ipc/lib/js/head.min.js"></script>
+  <script src="/assets/ipc/js/reveal.js"></script>
+  <script src="/assets/ipc/assets/jquery-2.1.3.min.js"></script>
+  <script src="/assets/ipc/assets/custom.js"></script>
 
-		<script>
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-        center: true,
-        slideNumber: 'c/t',
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+  <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      slideNumber: 'c/t',
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: '/assets/ipc/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '/assets/ipc/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '/assets/ipc/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '/assets/ipc/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '/assets/ipc/plugin/zoom-js/zoom.js', async: true },
-					{ src: '/assets/ipc/plugin/notes/notes.js', async: true }
-				]
-			});
-		</script>
-	</body>
+      // Optional reveal.js plugins
+      dependencies: [
+        { src: '/assets/ipc/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+        { src: '/assets/ipc/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+        { src: '/assets/ipc/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+        { src: '/assets/ipc/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+        { src: '/assets/ipc/plugin/zoom-js/zoom.js', async: true },
+        { src: '/assets/ipc/plugin/notes/notes.js', async: true }
+      ]
+    });
+  </script>
+
+  <script>
+
+    // set the dimensions and margins of the graph
+    var width = 400
+    var height = 400
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#frontSlideCountryGraph")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+
+      var continents = ["Asia", "Europe", "Africa", "Oceania", "Americas"];
+
+      var size = d3.scaleLinear()
+        .domain([0, 1400000000])
+        .range([7, 55]) ;
+
+
+      // Color palette for continents?
+      var color = d3.scaleOrdinal()
+        .domain(continents)
+        .range(d3.schemeSet1);
+
+    // Read data
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/11_SevCatOneNumNestedOneObsPerGroup.csv", function (data) {
+
+      // Filter a bit the data -> more than 1 million inhabitants
+      data = data.filter(function (d) { return d.value > 10000000 })
+
+      // Size scale for countries
+ // circle will be between 7 and 55 px wide
+  
+      // create a tooltip
+      var Tooltip = d3.select("#ttText")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("font-size", "15px")
+        .style("background-color", "white")
+        .style("border", "gray")
+        .style("padding", "1px")
+
+      // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function (d) {
+        Tooltip
+          .style("opacity", 1)
+      }
+      var mousemove = function (d) {
+
+        Tooltip
+          .html('<u>' + d.key + '</u>' + "<br>" + d.value + " inhabitants")
+          .style("left", (d3.mouse(this)[0] + 20) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+
+      }
+      var mouseleave = function (d) {
+        Tooltip
+          .style("opacity", 0)
+      }
+
+      // Initialize the circle: all located at the center of the svg area
+      var node = svg.append("g")
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "node")
+        .attr("r", function (d) { return size(d.value) })
+        .attr("cx", width / 2)
+        .attr("cy", height / 2)
+        .style("fill", function (d) { return color(d.region) })
+        .style("fill-opacity", 0.8)
+        .attr("stroke", "black")
+        .style("stroke-width", 1)
+        .on("mouseover", mouseover) // What to do when hovered
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+        .call(d3.drag() // call specific function when circle is dragged
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+      // Features of the forces applied to the nodes:
+      var simulation = d3.forceSimulation()
+        .force("center", d3.forceCenter().x(width / 2).y(height / 2)) // Attraction to the center of the svg area
+        .force("charge", d3.forceManyBody().strength(.4)) // Nodes are attracted one each other of value is > 0
+        .force("collide", d3.forceCollide().strength(.4).radius(function (d) { return (size(d.value) + 3) }).iterations(1)) // Force that avoids circle overlapping
+
+      // Apply these forces to the nodes and update their positions.
+      // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
+      simulation
+        .nodes(data)
+        .on("tick", function (d) {
+          node
+            .attr("cx", function (d) { return d.x; })
+            .attr("cy", function (d) { return d.y; })
+        });
+
+      // What happens when a circle is dragged?
+      function dragstarted(d) {
+        if (!d3.event.active) simulation.alphaTarget(.03).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+      function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+      }
+      function dragended(d) {
+        if (!d3.event.active) simulation.alphaTarget(.03);
+        d.fx = null;
+        d.fy = null;
+      }   
+      d3.select("#continentsSvg").select('#wrapper')
+	.selectAll('text')
+	.data(continents)
+	.enter()
+  .append('text')
+  .attr("font-size",15)
+	.attr('y', function(d, i) {
+		return 25*i;
+	})
+	.text(function(d) {
+		return d;
+	})
+	.style('fill', function(d) {
+		return color(d);
+	});
+ 
+
+    });
+
+   
+  </script>
+</body>
+
 </html>
