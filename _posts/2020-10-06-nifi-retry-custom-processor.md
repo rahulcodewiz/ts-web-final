@@ -23,7 +23,6 @@ author:
   last_name: Sharma
 permalink: "/bd/apache-nifi-retry-custom-processor/"
 ---
-#### Apache Nifi Wait & Retry in Custom Processor
 
 **Apache NIFI** provides several options for retry/wait until expected condition is satisfied. If you have a custom processor where you need to wait on certain condition by leveraging out of the box processors then overall implementation turnout complex solution. 
 
@@ -31,9 +30,11 @@ Alternatively, create native **Thread.sleep** and loop until expected condition 
 
 There's 3rd option which I am going to cover in this post using a custom Processor. This sample processor keep looping until it finds the file. If the file is not available then it penalize flow-file then transfer it on RETRY relartionship. The RETRY relationship point to self. And, this keep running until it finds the file then it sends incoming flow-file to success. 
 
+![Nifi Retry Processor Group](/assets/images/ts/app-ex.png)
+
+#### Sample Processor :
 
 ```java
-
 public class RetrySample
          extends AbstractProcessor {
  
