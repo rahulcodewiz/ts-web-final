@@ -76,7 +76,7 @@ Spark closures, objects must be serializable otherwise spark engine throws 'NotS
 
 <!-- wp:preformatted -->
 
-```
+```java
 /\*\* \* Create Custom KryoRegistrator implementation \*/ **public class** CustomKKryoRegistrator **implements** org.apache.spark.serializer.KryoRegistrator{ @Override **public void** registerClasses(Kryo kryo) { kryo.register(ABean. **class** ); //Register non serialize classes } } //Register Kryo in SparkConf- sparkConf.set( **"spark.kryo.registrar"** ,CustomKKryoRegistrator. **class**.getName());
 ```
 
@@ -90,7 +90,7 @@ Spark closures, objects must be serializable otherwise spark engine throws 'NotS
 
 <!-- wp:preformatted -->
 
-```
+```java
 **import** org.apache.spark.sql.Encoder; **import** org.apache.spark.sql.Encoders;Encoder<Employee> employeeEncoder = Encoders._`bean`_(Employee.class); Dataset<Employee> dataset= session.read().json(employee.json).as(employeeEncoder); **public class** Employee { **private** Integer **id** ; **private** String **name** ; }
 ```
 
@@ -112,7 +112,7 @@ Spark closures, objects must be serializable otherwise spark engine throws 'NotS
 
 <!-- wp:preformatted -->
 
-```
+```java
 Row max = dataset.agg(org.apache.spark.sql.functions._`max`_(dataset.col( **`"id"`** ))).as( **`"max"`** ).head();
 System. **_`out`_**.println(max);
 ```
@@ -127,7 +127,7 @@ System. **_`out`_**.println(max);
 
 <!-- wp:code -->
 
-```
+```java
 Dataset<Long> ds= SessionRegistry.session.range(1,20);
 
         ds.sparkSession().udf().register("add100",(Long l)->l+100,org.apache.spark.sql.types.DataTypes.LongType);
@@ -160,7 +160,7 @@ Create property file- e.g. job.properties
 
 <!-- wp:code -->
 
-```
+```java
 //Supply Propty to spark using spark-submit
 ${SPARK_HOME}/bin/spark-submit --files job.properties
 //Read file in drive
@@ -198,7 +198,7 @@ prop.getProperty("custom.prop");
 
 <!-- wp:preformatted -->
 
-```
+```java
 _/\*\* \* The sample accumulator to store set of string values \*/_ **class** CustomAccumulator **extends** AccumulatorV2\<String,Set\<String\>\>{ Set\<String\> **myval** = **new** HashSet\<\>(); @Override **public void** merge(AccumulatorV2\<String, Set\<String\>\> other) { other.value().stream().forEach(val-\> **myval**.add(val)); } @Override **public boolean** isZero() { **return myval**.size()==0; } @Override **public** AccumulatorV2\<String, Set\<String\>\> copy() { **return this** ; } @Override **public void** reset() { **myval**.clear(); } @Override **public void** add(String v) { **myval**.add(v); } @Override **public** Set\<String\> value() { **return myval** ; } } //Register accumulator to SparkContext. jsc object is created during init section (begining) AccumulatorV2 accumulatorV2 = **new** CustomAccumulator();_jsc_.sc().register(accumulatorV2); //Use accumulatorV2 like normal accumulator
 ```
 
@@ -212,8 +212,16 @@ _/\*\* \* The sample accumulator to store set of string values \*/_ **class** Cu
 
 <!-- wp:preformatted -->
 
-```
-/\*\* \* Comparator for Integer \*/ public **class** LengthComparator **implements** Comparator\<Integer\>{ @Override **public int** compare(Integer o1, Integer o2) { **return** 0; } } //jsc is JavaSparkContext defined in the beginning during init. JavaRDD\<Integer\> javaRDD = _jsc_.parallelize(Arrays._asList_( **new** Integer[]{100,20,10,1020,100})); //Find max value using custom implementation Integer maxVal= javaRDD.max( **new** LengthComparator());
+```java
+/\*\* \* Comparator for Integer \*/ 
+public **class** LengthComparator **implements** Comparator\<Integer\>{ 
+  @Override **public int** compare(Integer o1, Integer o2) { **return** 0; 
+  } 
+  } 
+  //jsc is JavaSparkContext defined in the beginning during init. 
+  JavaRDD\<Integer\> javaRDD = _jsc_.parallelize(Arrays._asList_( **new** Integer[]{100,20,10,1020,100})); 
+  //Find max value using custom implementation 
+  Integer maxVal= javaRDD.max( **new** LengthComparator());
 ```
 
 <!-- /wp:preformatted -->
