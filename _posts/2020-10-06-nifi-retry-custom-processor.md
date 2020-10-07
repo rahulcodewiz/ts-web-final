@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NIFI Retry in custom processor
+title: Apache NIFI Retry & wait in custom processor
 date: 2020-10-06 04:22:02.000000000 -08:00
 type: post
 parent_id: '0'
@@ -23,7 +23,7 @@ author:
   last_name: Sharma
 permalink: "/bd/apache-nifi-retry-custom-processor/"
 ---
-#### Apache Nifi Retry in Custom Processor
+#### Apache Nifi Wait & Retry in Custom Processor
 
 **Apache NIFI** provides several options for retry/wait until expected condition is satisfied. If you have a custom processor where you need to wait on certain condition by leveraging out of the box processors then overall implementation turnout complex solution. 
 
