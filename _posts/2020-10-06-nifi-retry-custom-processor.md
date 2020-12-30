@@ -24,7 +24,7 @@ author:
 permalink: "/bd/apache-nifi-retry-custom-processor/"
 ---
 
-**Apache NIFI** provides several options for retry/wait until expected condition is satisfied. If you have a custom processor where you need to wait on certain condition by leveraging out of the box processors then overall implementation turnout complex solution. 
+**Apache NIFI** provides various options to retry/wait in processors. If you want to implement custom processor with out of the box nifii solutions to wait on certain condition/external-resource then it would be complex workflow. 
 
 Alternatively, create native **Thread.sleep** and loop until expected condition is satisfied. I wouldn't recommend doing this as it blocks entire flowfile execution.
 
