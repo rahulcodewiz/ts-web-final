@@ -18,7 +18,7 @@ remote_theme: "mmistakes/so-simple-theme@3.2.0"
 skin: "/assets/css/skins/default.css"
 locale: en-US
 title: "Techsquids"
-description: "Learn>Implement>Grow"
+description: "Learn>Share>Grow"
 baseurl: # the subpath of your site, e.g. "/blog"
 url: # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 logo: '/assets/images/ts/logo_transparent.png'
@@ -79,6 +79,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
+  - youtube
 
 # Front Matter Defaults
 defaults:
