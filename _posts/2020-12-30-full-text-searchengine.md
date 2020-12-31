@@ -28,7 +28,7 @@ permalink: "/bd/search-engine-elasticsearch-python/"
 ---
 
 This article covers step by step guide to build a full text Search Engine using the Python and ElasticSearch. 
-#### Project Features:
+#### I use "Food Recipes Search Engine" project for this guide and this project features are:
 
 - Auto-complete, Spell correction and Auto-suggestion in the search bar achieved
 - Full Text Search on N-Grams
@@ -38,3 +38,5 @@ This article covers step by step guide to build a full text Search Engine using 
 - A Classification module using the SparkNLP+BERT
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8MrQOFWIooo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
