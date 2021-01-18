@@ -27,6 +27,8 @@ author:
 permalink: "/bd/search-engine-elasticsearch-python/"
 ---
 
+![Python Elastic](/assets/images/python_es.png)
+
 This article covers step by step guide to build a full text Search Engine using the Python and ElasticSearch. 
 #### I use "Food Recipes Search Engine" project for this guide and this project features are:
 
@@ -242,7 +244,7 @@ There are two options to launch the app Docker and manual bash script. Refer the
 
 #### Troubleshoot and suggestions:
 
-1. Make sure all python packages are installed correctly.
+1. Make sure all python packages are installed correctly before you launch app.
 2. Few browsers need below configurations to be added ElasticSearch config file:
 
 ```Properties
