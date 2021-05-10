@@ -51,3 +51,4 @@ permalink: "/dv/india-ipc-crimes-analysis/"
 - [Dataset](https://github.com/reethified/India-IPC-Crimes-Datasets)
 
 
+**Author:** Rahul Sharma
