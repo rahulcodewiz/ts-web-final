@@ -274,7 +274,7 @@ public class LengthComparator implements Comparator<Integer>{
   
   //jsc is JavaSparkContext defined in the beginning during init. 
   
-  JavaRDD<Integer> javaRDD = jsc.parallelize(Arrays._asList_( new Integer[]{100,20,10,1020,100})); 
+  JavaRDD<Integer> javaRDD = jsc.parallelize(Arrays.asList( new Integer[]{100,20,10,1020,100})); 
   //Find max value using custom implementation 
   Integer maxVal= javaRDD.max( new LengthComparator());
 ```
