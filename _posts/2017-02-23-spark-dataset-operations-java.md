@@ -303,11 +303,40 @@ Project structure:
 
 Create Bean definition:
 
-```
-public class People implements Serializable { private String name; private Long age; public People() { } public People(String name, Long age) { this.name = name; this.age = age; } public String getName() { return name; } public void setName(String name) { this.name = name; } public Long getAge() { return age; } public void setAge(Long age) { this.age = age; } }
+```java
+
+public class People implements Serializable { 
+  private String name; 
+  private Long age; 
+  public People() { } 
+  public People(String name, Long age) { 
+  this.name = name; 
+  this.age = age; 
+  } 
+  
+  public String getName() { 
+  return name; 
+  } 
+  
+  public void setName(String name) { 
+    this.name = name; 
+  } 
+  
+  public Long getAge() { 
+    return age; 
+  } 
+  
+  public void setAge(Long age) { 
+    this.age = age;
+  } 
+  
+}
 ```
 
 Create people.json file in resource directory:  
+
+```json
+
 {"name":"PhilipHester","age":88}  
 {"name":"DylanBecker","age":64}  
 {"name":"JohnCarpenter","age":60}  
@@ -316,15 +345,22 @@ Create people.json file in resource directory:
 {"name":"DolanRowland","age":96}  
 {"name":"JonahWhitaker","age":41}
 
+```
+
 Filter content of dataset:
 
-```
-public class Application { public static void main(String[] args) { SparkSession session=SparkSession.builder().appName("dataset example").getOrCreate(); /\*\* \* Define encoder, used to convert data to binary format in jvm \*/ Encoder encode= Encoders.bean(People.class); /\*\* \* Load dataset from json \*/ Dataset ds= session.read().json(Thread.currentThread(). getContextClassLoader().getResource("people.json"). getPath()).as(encode); ds.filter((FilterFunction<people>)s-&gt; (s.getAge()&gt;30)).show();
-
-
+```java 
+public class Application { 
+public static void main(String[] args) { 
+  SparkSession session=SparkSession.builder().appName("dataset example").getOrCreate(); 
+  /* Define encoder, used to convert data to binary format in jvm */ 
+  
+  Encoder encode= Encoders.bean(People.class); 
+  /* Load dataset from json */ 
+  
+  Dataset ds= session.read().json(Thread.currentThread(). getContextClassLoader().getResource("people.json"). getPath()).as(encode); 
+  ds.filter((FilterFunction<people>)s->s.getAge()>30)).show();
 
     }
 }
-
-</people>
 ```
