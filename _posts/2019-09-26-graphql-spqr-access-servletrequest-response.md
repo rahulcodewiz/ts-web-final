@@ -34,15 +34,19 @@ author:
   last_name: Sharma
 permalink: "/java/graphql-spqr-access-servletrequest-response/"
 ---
-<!-- wp:paragraph -->
 
-GraphQL SPQR is a powerful library to build graphql services using Springboot.
+GraphQL SPQR is a powerful library to build graphql services using Springboot and aims to make it simple to develop GraphQL API from any Java project.
 
-<!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
+SPQR annotation directly allows us to access HTTP methods(GET/POST/DELETE/POST) and content but some times that's not enough and we need servelet object access to sprint API to customize actions e.g.
 
-Code snippet to access native ServletRequest object and populate header based on a condition-
+- Access all headers
+- Populate new headers
+- Access html Body content
+- Custom renedering to Rest API handlers.
+
+
+### Code snippet to access native ServletRequest object and populate header based on a condition-
 
 <!-- /wp:paragraph -->
 
@@ -72,30 +76,9 @@ if(name.equals("")){
 }
 ```
 
-<!-- /wp:preformatted -->
-
-<!-- wp:paragraph -->
-
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
 
 **References**
 
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
 
 - [GraphQL SPQR](https://github.com/leangen/graphql-spqr)
 - [Spring Boot](https://spring.io/projects/spring-boot)
-
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-
-<!-- /wp:paragraph -->
-
