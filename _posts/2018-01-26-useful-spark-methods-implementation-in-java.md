@@ -220,31 +220,48 @@ class CustomAccumulator extends AccumulatorV2<String,Set<String>>{
 
 [Spark Wiki Accumulators](https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#accumulators)
 
-#### Custom **Comparator implementation for the compare operations-**
+#### Custom Type Comparator-
 
-<!-- /wp:heading -->
+Comparator play important role in data comparison for actions like min, max, sort etc and there are out of the comparator for in-built datatypes (String, int, float, double). But there are cases when you need to run those Spark actions on custom defined objects and you need to tell Spark engine how to compare objects. 
 
-<!-- wp:preformatted -->
+
+**Comparator for custom object**
+```java
+
+public class MyBean{
+  public String name;
+  public Integer Id;
+  public integer address;
+}
+```
+
+For the mathematically inclined, the relation that defines the imposed ordering that a given comparator c imposes on a given set of objects S is:
+
+       {(name, id) such that c.compare(name, id) <= 0}.
+ 
+The quotient for this total order is:
+
+       {(name, id) such that c.compare(name, id) == 0}.
+
+**Comparator Declaration and use for compare**
 
 ```java
-/* Comparator for Integer */ 
 
-public class LengthComparator implements Comparator<Integer>{ 
-  @Override public int compare(Integer o1, Integer o2) { 
-  return 0; 
+public class LengthComparator implements Comparator<MyBean>{ 
+  @Override public int compare(MyBean o1, MyBean o2) { 
+    int name = o1.name.compareTo(o2.name);  
+        if (name != 0) {  
+            return name;  
+        } 
+      return o1.id.compareTo(o2.id); 
+    
   } 
-  } 
+} 
   
   //jsc is JavaSparkContext defined in the beginning during init. 
   
-  JavaRDD<Integer> javaRDD = jsc.parallelize(Arrays.asList( new Integer[]{100,20,10,1020,100})); 
+  JavaRDD<Integer> javaRDD = jsc.parallelize(Arrays.asList( new MyBean("abc",100,...), new MyBean("cde",200,...))); 
   //Find max value using custom implementation 
   Integer maxVal= javaRDD.max( new LengthComparator());
 ```
-
-<!-- /wp:preformatted -->
-
-<!-- wp:paragraph -->
-
-<!-- /wp:paragraph -->
 
