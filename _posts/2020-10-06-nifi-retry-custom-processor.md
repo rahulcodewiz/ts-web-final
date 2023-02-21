@@ -24,15 +24,17 @@ author:
 permalink: "/bd/apache-nifi-retry-custom-processor/"
 ---
 
-**Apache NIFI** provides various options to retry/wait in processors. If you want to implement custom processor with out of the box nifii solutions to wait on certain condition/external-resource then it would be complex workflow. 
+**Apache NIFI** provides various options to retry and wait in processors and if you need to implement a custom processor with out-of-the-box Nifi solutions for waiting on specific conditions or external-resource, then it would be a complex workflow.
 
-Alternatively, create native **Thread.sleep** and loop until expected condition is satisfied. I wouldn't recommend doing this as it blocks entire flowfile execution.
+Alternatively, you can implement a processor with native **Thread.sleep** and loop until the expected condition is satisfied, but I wouldn't recommend doing this as it blocks entire flow file execution.
 
-There's 3rd option which I am going to cover in this post using a custom Processor. This sample processor keep looping until it finds the file. If the file is not available then it penalize flow-file then transfer it on RETRY relartionship. The RETRY relationship point to self. And, this keep running until it finds the file then it sends incoming flow-file to success. 
+There's another option that I am going to cover in this post using a custom Processor. It leverages the Nifi internal features to wait in asynchrounous mode without blocking processor resources. It waits until certain resource condition is met e.g. file, if the file is not available then it penalizes flow file and then transfers it on the RETRY relationship. The RETRY relationship point to self. And, this keeps running until it finds the file then it sends the incoming flow file to success.
 
 ![Nifi Retry Processor Group](/assets/images/ts/app-ex.png)
 
-#### Sample Processor :
+### Sample Processor :
+
+This processor has `location of file` property and two relationships, `retry` and `success`. The `retry` is used for wait in asynchronous until file is available and then transfer to `success` relationship to next task. You can moidfy the file descriptor to any other resource. 
 
 ```java
 public class RetrySample
