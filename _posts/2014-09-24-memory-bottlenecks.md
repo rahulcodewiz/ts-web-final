@@ -32,6 +32,9 @@ author:
   last_name: Singh
 permalink: "/pt/memory-bottlenecks/"
 ---
+
+## How to Pinpoint Memory bottlenecks
+
  **The basic symptoms of memory bottlenecks that affect application performance are -**
 
 1. **Memory leak**

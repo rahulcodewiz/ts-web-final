@@ -32,6 +32,7 @@ author:
   last_name: Singh
 permalink: "/pt/important-performance-counters-for-net-applications/"
 ---
+
 The following performance counters for .net applications, can act as general guidelines for different performance problems, related to the .net application under test.
 
 • Processor\% Processor Time

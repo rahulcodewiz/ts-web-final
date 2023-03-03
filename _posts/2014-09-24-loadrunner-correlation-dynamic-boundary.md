@@ -33,6 +33,9 @@ author:
   last_name: Singh
 permalink: "/pt/loadrunner-correlation-dynamic-boundary/"
 ---
+
+##  Loadrunner Correlation of dynamic boundary
+
 LoadRunner [Correlation](http://www.techsquids.com/pt/loadrunner-correlation/ "Correlation")is one of the most important concept in loadrunner, especially when you are working on web protocols in loadrunner like web(http/html), sap web or Oracle web applications. When dealing with complex scripts, we encounter scenarios where the usual web\_reg\_save\_param function is not able to solve the purpose.
 
 You can use following regular expression attributes &nbsp;in your script to deal with correlation of dynamic boundary :-

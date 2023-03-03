@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to identify performance bottlenecks in Linux system –
+title: How to identify performance bottlenecks in Linux system
 date: 2014-09-24 11:27:29.000000000 -07:00
 type: post
 parent_id: '0'

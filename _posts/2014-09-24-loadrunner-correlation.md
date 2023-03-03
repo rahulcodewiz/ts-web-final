@@ -33,6 +33,9 @@ author:
   last_name: Singh
 permalink: "/pt/loadrunner-correlation/"
 ---
+
+##  LoadRunner Correlation
+
 LoadRunner Correlation is one of the most important concept in loadrunner, especially when you are working on web protocols in loadrunner like web(http/html), sap web or Oracle web applications etc.
 
 &nbsp;LoadRunner Correlation is used to deal with the dynamic values in script that changes with each script execution. The inbuilt function web\_reg\_save\_param in loadrunner can be used to implement loadrunner correlation.

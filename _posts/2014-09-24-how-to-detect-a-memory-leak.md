@@ -30,7 +30,7 @@ author:
   last_name: Singh
 permalink: "/pt/how-to-detect-a-memory-leak/"
 ---
- **How to detect a memory leak**
+ ## How to detect a memory leak 
 
 Finding memory leak is all about identifying objects that are created but never garbage collected. Memory leaks always get worse so, in theory, the longer the application runs, the bigger the leak will get, and the easier it will be to find.
 

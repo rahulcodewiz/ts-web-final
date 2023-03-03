@@ -1,6 +1,6 @@
 ---
 layout: post
-title: '"Error during code generation. The Vuser script was not generated" - Loadrunner'
+title: Error during code generation and The Vuser script was not generated in Loadrunner
 date: 2014-09-24 12:18:36.000000000 -07:00
 type: post
 parent_id: '0'
@@ -32,6 +32,8 @@ author:
   last_name: Singh
 permalink: "/pt/loadrunner-error-during-code-generation/"
 ---
+
+## Error during code generation and The Vuser script was not generated in Loadrunner
 Sometime, LoadRunner captures all events during recording but throws an&nbsp;Error during script generation - "Error during code generation. The Vuser script was not generated."
 
 Sometimes the character sets used are not supported by LoadRunner (by default) and creates issue at the time of script generation. Try regenerating the script after enabling UTF-8 type supported charset in recording options as shown below :
