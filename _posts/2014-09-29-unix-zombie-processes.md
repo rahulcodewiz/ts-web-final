@@ -19,33 +19,6 @@ meta:
   _yoast_wpseo_metadesc: 'UNIX: Zombie processes'
   _yoast_wpseo_linkdex: '64'
   dsq_thread_id: '3067599179'
-  wp-syntax-cache-content: "a:4:{i:1;s:584:\"\n<div class=\"wp_syntax\" style=\"position:relative;\"><table><tr><td
-    class=\"code\"><pre class=\"powershell\" style=\"font-family:monospace;\">$ <span
-    style=\"color: #008080; font-weight: bold;\">ps</span> aux <span style=\"color:
-    pink;\">|</span> awk <span style=\"color: #800000;\">'{print $2, $8}'</span> <span
-    style=\"color: pink;\">|</span> grep <span style=\"color: pink;\">-</span>w <span
-    style=\"color: #800000;\">'Z'</span>\n<span style=\"color: #804000;\">7963</span>
-    Z</pre></td></tr></table><p class=\"theCode\" style=\"display:none;\">$ ps aux
-    | awk '{print $2, $8}' | grep -w 'Z'\r\n7963 Z</p></div>\n\";i:2;s:402:\"\n<div
-    class=\"wp_syntax\" style=\"position:relative;\"><table><tr><td class=\"code\"><pre
-    class=\"powershell\" style=\"font-family:monospace;\">$ <span style=\"color: #008080;
-    font-weight: bold;\">kill</span> <span style=\"color: pink;\">-</span><span style=\"color:
-    #804000;\">9</span> <span style=\"color: #804000;\">7963</span></pre></td></tr></table><p
-    class=\"theCode\" style=\"display:none;\">$ kill -9 7963</p></div>\n\";i:3;s:662:\"\n<div
-    class=\"wp_syntax\" style=\"position:relative;\"><table><tr><td class=\"code\"><pre
-    class=\"powershell\" style=\"font-family:monospace;\">$ <span style=\"color: #008080;
-    font-weight: bold;\">kill</span> <span style=\"color: pink;\">-</span><span style=\"color:
-    #804000;\">9</span> $<span style=\"color: #000000;\">&#40;</span><span style=\"color:
-    #008080; font-weight: bold;\">ps</span> aux <span style=\"color: pink;\">|</span>
-    awk <span style=\"color: #800000;\">'$8 == &quot;Z&quot; {print $2}'</span><span
-    style=\"color: #000000;\">&#41;</span></pre></td></tr></table><p class=\"theCode\"
-    style=\"display:none;\">$ kill -9 $(ps aux | awk '$8 == &quot;Z&quot; {print $2}')</p></div>\n\";i:4;s:453:\"\n<div
-    class=\"wp_syntax\" style=\"position:relative;\"><table><tr><td class=\"code\"><pre
-    class=\"powershell\" style=\"font-family:monospace;\">$ <span style=\"color: #008080;
-    font-weight: bold;\">ps</span> aux <span style=\"color: pink;\">|</span> awk <span
-    style=\"color: #800000;\">'$8 == &quot;Z&quot; || NR == 1 {print $0}'</span></pre></td></tr></table><p
-    class=\"theCode\" style=\"display:none;\">$ ps aux | awk '$8 == &quot;Z&quot;
-    || NR == 1 {print $0}'</p></div>\n\";}"
 author:
   login: Nikhil
   email: coolnicks.nikhil@gmail.com
@@ -55,6 +28,8 @@ author:
   last_name: Gupta
 permalink: "/br/unix-zombie-processes/"
 ---
+
+## Unix zombie processes
 In this part I am going to answer below questions regarding zombie process
 
 - What are zombie process?

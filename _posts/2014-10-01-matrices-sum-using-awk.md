@@ -20,38 +20,6 @@ meta:
   _yoast_wpseo_metadesc: Sum of Matrices using awk in one line
   _yoast_wpseo_linkdex: '68'
   dsq_thread_id: '3071474143'
-  wp-syntax-cache-content: "a:1:{i:1;s:2491:\"\n<div class=\"wp_syntax\" style=\"position:relative;\"><table><tr><td
-    class=\"code\"><pre class=\"powershell\" style=\"font-family:monospace;\">$ <span
-    style=\"color: #008080; font-weight: bold;\">cat</span> f1\n<span style=\"color:
-    #804000;\">1</span> <span style=\"color: #804000;\">1</span> <span style=\"color:
-    #804000;\">1</span>\n<span style=\"color: #804000;\">1</span> <span style=\"color:
-    #804000;\">1</span> <span style=\"color: #804000;\">1</span>\n<span style=\"color:
-    #804000;\">1</span> <span style=\"color: #804000;\">1</span> <span style=\"color:
-    #804000;\">1</span>\n$ <span style=\"color: #008080; font-weight: bold;\">cat</span>
-    f2\n<span style=\"color: #804000;\">2</span> <span style=\"color: #804000;\">2</span>
-    <span style=\"color: #804000;\">2</span>\n<span style=\"color: #804000;\">2</span>
-    <span style=\"color: #804000;\">2</span> <span style=\"color: #804000;\">2</span>\n<span
-    style=\"color: #804000;\">2</span> <span style=\"color: #804000;\">2</span> <span
-    style=\"color: #804000;\">2</span>\n$ <span style=\"color: #008080; font-weight:
-    bold;\">cat</span> f3\n<span style=\"color: #804000;\">3</span> <span style=\"color:
-    #804000;\">3</span> <span style=\"color: #804000;\">3</span>\n<span style=\"color:
-    #804000;\">3</span> <span style=\"color: #804000;\">3</span> <span style=\"color:
-    #804000;\">3</span>\n<span style=\"color: #804000;\">3</span> <span style=\"color:
-    #804000;\">3</span> <span style=\"color: #804000;\">3</span>\n$ awk <span style=\"color:
-    #800000;\">'{for (i=1;i&amp;lt;=NF;i++) { arr[FNR,i] = arr[FNR,i] + $i; if(k &amp;lt;
-    NF){k=NF} } } END { print &quot;Matrix Sum:&quot;; for(i=1;i&amp;lt;=FNR;i++)
-    { for(j=1;j&amp;lt;=k;j++) { printf &quot;%s &quot;, arr[i,j] } print &quot;&quot;}}'</span>
-    f1 f2 f3\nMatrix Sum:\n<span style=\"color: #804000;\">6</span> <span style=\"color:
-    #804000;\">6</span> <span style=\"color: #804000;\">6</span>\n<span style=\"color:
-    #804000;\">6</span> <span style=\"color: #804000;\">6</span> <span style=\"color:
-    #804000;\">6</span>\n<span style=\"color: #804000;\">6</span> <span style=\"color:
-    #804000;\">6</span> <span style=\"color: #804000;\">6</span></pre></td></tr></table><p
-    class=\"theCode\" style=\"display:none;\">$ cat f1\r\n1 1 1\r\n1 1 1\r\n1 1 1\r\n$
-    cat f2\r\n2 2 2\r\n2 2 2\r\n2 2 2\r\n$ cat f3\r\n3 3 3\r\n3 3 3\r\n3 3 3\r\n$
-    awk '{for (i=1;i&amp;lt;=NF;i++) { arr[FNR,i] = arr[FNR,i] + $i; if(k &amp;lt;
-    NF){k=NF} } } END { print &quot;Matrix Sum:&quot;; for(i=1;i&amp;lt;=FNR;i++)
-    { for(j=1;j&amp;lt;=k;j++) { printf &quot;%s &quot;, arr[i,j] } print &quot;&quot;}}'
-    f1 f2 f3\r\nMatrix Sum:\r\n6 6 6\r\n6 6 6\r\n6 6 6</p></div>\n\";}"
 author:
   login: Nikhil
   email: coolnicks.nikhil@gmail.com
@@ -61,6 +29,7 @@ author:
   last_name: Gupta
 permalink: "/br/matrices-sum-using-awk/"
 ---
+## Matrices Sum using awk
 Below program can provide sum of&nbsp;any number of matrices of any degree.
 
 - &nbsp;Here, I am adding 3 matrices.
