@@ -30,7 +30,7 @@ author:
   last_name: Sharma
 permalink: "/bd/hbase-scan-filters-tips-tricks/"
 ---
- **Hbase tips and tricks**
+## Hbase tips and tricks
 
  This post shares the useful tips and tricks for the Hbase-
 
