@@ -66,20 +66,21 @@ author:
   last_name: Sharma
 permalink: "/bd/hive-hadoop-jar-files-conflicts/"
 ---
- **Hive hadoop jar files conflicts for custom UDF/Serde**
+ ## Hive hadoop jar files conflicts for custom UDF and Serde
 
-I have faced this problem very often and it take long time figure to resolve libraries conflicts.  
-As Hadoop Map reduce libraries gets preferences when you launch Mapreduce job or hive lanuch mapreduce job and suppose your custom library required latest version of jars whose older version is already present in Hadoop class path. Even you add your jars hive class path or auxiliary class path this issue still occur.  
-Steps to resolve such libraries conflicts.
+I have faced this problem very often and it takes long time figureout how to resolve libraries conflicts.  
+This happens because default Mapreduce libraries gets preferences when you launch Mapreduce job or hive and suppose your custom library required the latest version of jars which is already present in Hadoop class path. This error won't get resolve even when you add your jars hive classpath or auxiliary class path this issue still occur. You need to tell Mapreduce engine or hive to use user provided jars first in the classpath.
 
-- Add jar to Hadoop class path-
+E.g.  
+
+- Let's add jar to Hadoop class path-
 ```
 export HADOOP\_CLASSPATH=/xxx/noggit-0.6.jar:/xxx/httpclient-4.5.1.jar
 ```
-- Next launch hive command with Auxiliary path library. check my post on hive aux class path issue **[aux path](http://www.techsquids.com/bd/hive-noclassdeffounderror-auxiliary-path-issue/)**.
-- In case of mapreduce job, also add your libraries to HADOOP\_TASKTRACKER\_OPTS
+
+- Add your libraries to HADOOP_TASKTRACKER_OPTS
 ```
-HADOOP\_TASKTRACKER\_OPTS="-classpath\<colon-separated-paths-to-your-jars\>"
+HADOOP_TASKTRACKER_OPTS="-classpath<colon-separated-paths-to-your-jars>"
 ```
 
 You can also add jars to map reduce class path by adding class to mapreduce job builder-
@@ -88,7 +89,7 @@ You can also add jars to map reduce class path by adding class to mapreduce job 
 Job job = new Job(conf); job.setJarByClass(<any class from third party jar file>.class);
 </any>
 ```
-- If required set below properties to true in hive-
+### This is the way to use user classpath first-
 ```
 set mapreduce.task.classpath.first=true; set mapreduce.job.user.classpath.first=true;
 ```
