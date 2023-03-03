@@ -32,7 +32,8 @@ author:
   last_name: Sharma
 permalink: "/bd/solr-multithreaded-concurrent-atomic-updates-problem/"
 ---
-Solr Multithreaded concurrent atomic updates problem:  
+## Solr Multithreaded concurrent atomic updates problem:  
+
 Solr has few limitations for the data ingestion, as it doesn't provide row level lock over document.  
  I face this problem while uploading data in bulk to solr5 in multithread environment and I solved it by solrj client side lock.  
 When concurrent threads try to make atomic update on a multivalued field of a document at the same time, few threads changes get overridden and it happens because last thread update take sometime to get indexed.
