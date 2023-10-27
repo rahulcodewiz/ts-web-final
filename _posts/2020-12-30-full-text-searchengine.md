@@ -29,24 +29,28 @@ permalink: "/bd/search-engine-elasticsearch-python/"
 
 ![Python Elastic](/assets/images/python_es.png)
 
-This article covers step by step guide to build a full text Search Engine using the Python and ElasticSearch. 
-#### I use "Food Recipes Search Engine" project for this guide and this project features are:
+# Building a Full-Text Search Engine with Python and ElasticSearch
 
-- Auto-complete, Spell correction and Auto-suggestion in the search bar achieved
-- Full Text Search on N-Grams
-- Guide to define index configuration i.e. Analyzer, Filter, Tokenizer etc
-- Module to index document using Python.
-- Dataset to explore search feature
-- A Classification module using the SparkNLP+BERT
+In today's digital age, information retrieval is crucial, and search engines have become an integral part of our lives. Whether it's looking up information on the web or searching for specific items within a database, search engines are at the core of these operations. In this article, I will guide you through the step-by-step process of building a full-text search engine using Python and ElasticSearch.
+
+## The "Food Recipes Search Engine" Project
+
+This project features several advanced search functionalities, including:
+
+1. Auto-Complete, Spell Correction, and Auto-Suggestion: Enhancing the user experience with intelligent search suggestions.
+2. Full Text Search on N-Grams: Utilizing N-Grams for improved search accuracy.
+3. Index Configuration: A guide to defining index configuration, including Analyzer, Filter, Tokenizer, and more.
+4. Data Ingestion: A Python module to index documents into ElasticSearch.
+5. Dataset for Exploration: Providing a dataset to explore the search engine's features.
+6. Classification Module: Using SparkNLP+BERT for a classification module.
+
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8MrQOFWIooo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
+### ElasticSearch Index Configuration
 
-#### ElasticSearch Index Configuration:
-
-The most crucial part of any Search Engine app is finding the suitable Index configuration and it largely depends on individual usecase need. It is difficult to generalize it. Primarily the configuration involves discovery of Analyzer, Filter, and Tokenizer for the index fields and here are what I implemented for this Search Engine:
-
+The heart of any search engine application lies in its index configuration. Configuring the index depends on the specific use case and requirements. Here's an example of an ElasticSearch index configuration:
 
 ```json
 curl -X PUT "localhost:9200/recipes_idx1?pretty" -H 'Content-Type: application/json' -d'
@@ -134,28 +138,34 @@ curl -X PUT "localhost:9200/recipes_idx1?pretty" -H 'Content-Type: application/j
 [Recipe Search Elastic Search notes](https://github.com/reethified/recipes-search-engine/blob/master/es-setup/es-notes.txt)
 
 Also, I recommend using the Kibana for exploring Elastic index features. This is amazing tool for prototyping and analysing search behaviors.
-#### Data Ingestion to Elastic Search:
 
-I used python to build the data ingestion pipeline. Data ingestion script loads data from json file then iterate over each record and finally, it loads to Elastic Search.
+### Data Ingestion to Elastic Search:
+
+To load data into ElasticSearch, a Python script is used. This script reads data from a JSON file, iterates over each record, and loads it into ElasticSearch. Here is an example of a data ingestion script:
+
 
 [es_data_loader.py](https://github.com/reethified/recipes-search-engine/blob/master/batch/es_data_loader.py)
 
-#### Dataset for Search:
+### Dataset for Search:
 
 Previous step read data from this directory and load to Elastic Search.
 
 [Dataset](https://github.com/reethified/recipes-search-engine/tree/master/dataset)
 
-#### Search engine application:
 
-The overall application is implemented using html, javascript and Python flask. Explore further [repository](https://github.com/reethified/recipes-search-engine/tree/master/search-engine-webapp) and post in case of any queries.
-1. ##### Autosuggest/ Spell-check/ Spell-correction:
+### Search engine application:
 
-This feature is devided into two features, frontend which is implemented in Javascript and backend is in Python. Frontend is primarily used for UI experience and each UI query is renderded using Javascript/AJAX to backend Python service.
+The entire application is implemented using HTML, JavaScript, and Python Flask. To explore this project further, you can refer to the respective repository and documentation.
 
-The backend service has a controller and service layers. Controller layer accepts calls from UI and invoke respective service module. All ElasticSearch operations are implemented in [python class](https://github.com/reethified/recipes-search-engine/blob/master/search-engine-webapp/app/search_service.py)
+##### Autosuggest/ Spell-check/ Spell-correction:
 
-E.g. Autosuggest implementation in <b>title</b> field:
+
+These features are divided into frontend and backend components. The frontend is implemented in JavaScript for a smooth user interface, and it communicates with the Python backend.
+
+In the backend, there are controller and service layers. The controller layer handles requests from the UI and invokes the relevant service modules. All ElasticSearch operations are performed within [python class](https://github.com/reethified/recipes-search-engine/blob/master/search-engine-webapp/app/search_service.py).
+
+
+For example, here's how auto-suggestion is implemented in the title field:
 
 ```python
 def autosuggestTerm(query):
@@ -205,7 +215,7 @@ def autosuggestPhrase(query):
     return suggestRes
 ```
 
-2. ##### Search Elasticsearch from Python:
+##### Search Elasticsearch from Python:
 
 Python service class parse text sent from UI and query Elastic. Text Highlight is achived using the [Elastic feature](https://www.elastic.co/guide/en/elasticsearch/reference/current/highlighting.html) and [highlight text](https://www.w3schools.com/tags/tag_mark.asp) html tag.
 
@@ -237,7 +247,7 @@ def searchEs(query):
     return res
 ```
 
-3. ##### Start the Search Engine app: 
+##### Start the Search Engine app: 
 
 There are two options to launch the app Docker and manual bash script. Refer the [README](https://github.com/reethified/recipes-search-engine) file for docker and for non docker use the [manual script](https://github.com/reethified/recipes-search-engine/blob/master/setup_without_docker.md). 
 
@@ -254,3 +264,6 @@ There are two options to launch the app Docker and manual bash script. Refer the
  http.cors.allow-headers: X-Requested-With,X-Auth-Token,Content-Type,Content-Length
  http.cors.allow-credentials: true
 ```
+
+
+Building a full-text search engine can be a complex but highly rewarding endeavor. The "Food Recipes Search Engine" project serves as a comprehensive example of what is possible when combining Python and ElasticSearch to deliver powerful search capabilities. With this guide, you're well on your way to creating your own customized search engine tailored to your specific needs. Happy searching!
