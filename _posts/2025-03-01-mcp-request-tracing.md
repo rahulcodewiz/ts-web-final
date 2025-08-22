@@ -22,7 +22,6 @@ author:
   last_name: Sharma
 permalink: "/bd/mcp-e2e-request-tracing/"
 ---
-![MCP Request Tracing]({{ site.baseurl }}/assets/images/mcp_tracing.png)
 
 When debugging distributed systems, you need to track requests across multiple services and async operations. This article shows how to implement automatic request tracing using Python's `contextvars` module, ensuring every log entry includes session and request identifiers for easy correlation.
 
@@ -154,6 +153,8 @@ app = Starlette(
 ```
 
 That's it. Your entire application now has automatic request tracing.
+
+![MCP Request Tracing]({{ site.baseurl }}/assets/images/mcp_tracing.png)
 
 ## Impact
 
